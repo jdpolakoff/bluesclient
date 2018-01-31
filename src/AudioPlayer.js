@@ -11,7 +11,8 @@ class AudioPlayer extends Component {
     super()
     this.state = {
       pods: {},
-      selectedPod: {}
+      selectedPod: {},
+      divClass: 'card'
     }
   }
 
@@ -36,18 +37,27 @@ class AudioPlayer extends Component {
 
     var podDivs = this.state.pods.map((pod)=>{
         return (
-        <div className="card">
-          <h2 onClick={()=>this.setState({selectedPod: pod})}>{pod.name} {pod.date}</h2>
+        <div onClick={()=> this.setState({selectedPod: pod})} value={pod.src} className={this.state.divClass}>
+            <h2>{pod.name} {pod.date}</h2>
         </div>
       )
     })
 
+    if (podDivs.length > 0){
+      podDivs.forEach((pod)=>{
+        if (pod.props.value === this.state.selectedPod.src){
+          console.log(pod)
+        }
+      })
+    }
+
+
       return (
         <div>
-        <Navbar />
-        <h1>WPFW 89.3-FM<br/>Don't Forget The Blues</h1>
+        <Navbar song={this.state.selectedPod}/>
+        <h1>WPFW 89.3-FM<br/>Dont Forget The Blues</h1>
         <div className="contain">
-        {podDivs}
+          {podDivs}
         </div>
         <audio controls controlsList="nodownload" autoPlay="true" src={this.state.selectedPod.src}>
         </audio >
