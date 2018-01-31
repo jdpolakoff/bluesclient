@@ -1,0 +1,69 @@
+body{
+  font-family: sans-serif;
+  text-align: center
+}
+
+
+.contain {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 30px
+}
+
+.navigation {
+  background: #f4f5f6;
+  background: black;
+  border-bottom: .1rem solid #d1d1d1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 3.2rem;
+  left: 0;
+  max-width: 100%;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+@keyframes glow {
+    0%   {background-color: green;}
+    50%  {background-color: yellow;}
+    100%  {background-color: purple;}
+}
+
+.card {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 10px;
+  max-width: 375px;
+  margin: 20px auto;
+}
+
+.animated{
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 10px;
+  max-width: 375px;
+  margin: 20px auto;
+  animation-name: glow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  }
+
+audio {
+  min-width: 100%;
+  display: block;
+  position: fixed;
+  bottom: 0;
+}
+
+.card:hover{
+  cursor: pointer
+}
