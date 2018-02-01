@@ -31,8 +31,7 @@ class AudioPlayer extends Component {
           item['title'] = item.name.split(' - ')[0]
           item['cover'] = blues
         })
-        this.setState({pods: response.data}, function(){
-          console.log(this.state.pods)
+        this.setState({pods: response.data})
         })
       })
   }
