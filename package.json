@@ -16,6 +16,7 @@
     "react-marquee-double": "^0.1.7",
     "react-music-player": "^1.0.3",
     "react-responsive-music-player": "^0.2.4",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-sound": "^1.1.0",
     "react-soundcloud-widget": "^2.0.4",

@@ -15,7 +15,13 @@ h2 {
   font-weight: 400
 }
 
+#donate{
+  font-size: .8em
+}
 
+a {
+  text-decoration: none
+}
 .contain {
   display: flex;
   flex-direction: column;

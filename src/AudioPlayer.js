@@ -6,6 +6,7 @@ import $ from 'jquery'
 import Navbar from './Navbar'
 import blues from './images/blues.jpg'
 import MusicPlayer from 'react-responsive-music-player'
+import { Link } from 'react-router-dom'
 
 
 class AudioPlayer extends Component {
@@ -52,7 +53,11 @@ class AudioPlayer extends Component {
 
       return (
         <div>
-        <h1>WPFW 89.3 FM<br/>🎵Don't Forget The Blues🎵</h1>
+        <div className="header">
+          <h1>WPFW 89.3 FM<br/>
+          🎵Don't Forget The Blues🎵<br/>
+          <a href="http://www.wpfwfm.org/radio/support-us/vehicle-donation-program" target="_blank"><span id="donate">Donate to WPFW</span></a></h1>
+        </div>
         <MusicPlayer playlist={this.state.pods} />
         <div className="contain">
         <h2>Playlist:</h2>
