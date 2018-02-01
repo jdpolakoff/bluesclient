@@ -63,6 +63,11 @@ a {
     100%  {color: green;}
 }
 
+.comments {
+  width: 60%;
+  margin: 0 auto;
+}
+
 .card {
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
   transition: 0.3s;

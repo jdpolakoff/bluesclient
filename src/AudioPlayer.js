@@ -7,6 +7,7 @@ import Navbar from './Navbar'
 import blues from './images/blues.jpg'
 import MusicPlayer from 'react-responsive-music-player'
 import { Link } from 'react-router-dom'
+import ReactDisqusComments from 'react-disqus-comments'
 
 
 class AudioPlayer extends Component {
@@ -50,6 +51,9 @@ class AudioPlayer extends Component {
     var streamUrl = this.state.selectedPod.src
     var streamTitle = this.state.selectedPod.name
 
+    var url = 'https://dontforgettheblues.herokuapp.com'
+    var uniqueId = 8568
+    var title = "Don't Forget The Blues"
 
       return (
         <div>
@@ -62,6 +66,14 @@ class AudioPlayer extends Component {
         <div className="contain">
         <h2>Playlist:</h2>
           {podDivs}
+        </div>
+        <div className="comments">
+        <ReactDisqusComments
+          shortname="dont-forget-the-blues"
+          title={title}
+          identifier={uniqueId}
+          url={url}
+        />
         </div>
         </div>
       )
