@@ -32,7 +32,6 @@ class AudioPlayer extends Component {
           item['cover'] = blues
         })
         this.setState({pods: response.data})
-        })
       })
   }
 
