@@ -76,7 +76,7 @@ class AudioPlayer extends Component {
         </div>
       )
     } else {
-      return <p>loading...</p>
+      return <p>loading music...</p>
     }
   }
 }
