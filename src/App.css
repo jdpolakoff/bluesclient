@@ -95,3 +95,9 @@ audio {
 .card:hover{
   cursor: pointer
 }
+
+@media only screen and (max-width: 1000px) {
+  .comments {
+    width: 85%
+  }
+}
