@@ -3,16 +3,36 @@ body{
   text-align: center
 }
 
+html {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,PingFang SC,Source Han Sans CN,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 400
+}
+
 
 .contain {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 30px
+}
+
+.progress-container{
+  height: 10px
+}
+
+.player-container {
+  width: 95%;
+  margin: 0 auto
 }
 
 .navigation {

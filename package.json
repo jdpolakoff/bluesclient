@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "basscss": "^8.0.2",
     "classnames": "^2.2.5",
     "jquery": "^3.3.1",
     "material-ui": "^0.20.0",
@@ -11,9 +12,15 @@
     "react-audio-player": "^0.9.0",
     "react-audioplayer": "^0.3.1",
     "react-dom": "^16.2.0",
+    "react-jinke-music-player": "^3.2.2",
     "react-marquee-double": "^0.1.7",
+    "react-music-player": "^1.0.3",
+    "react-responsive-music-player": "^0.2.4",
     "react-scripts": "1.1.0",
-    "react-sound": "^1.1.0"
+    "react-sound": "^1.1.0",
+    "react-soundcloud-widget": "^2.0.4",
+    "react-soundplayer": "^1.0.4",
+    "soundcloud-audio": "^1.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

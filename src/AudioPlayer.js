@@ -3,17 +3,17 @@ import logo from './logo.svg'
 import './App.css'
 import axios from 'axios'
 import $ from 'jquery'
-import ReactAudioPlayer from 'react-audio-player';
 import Navbar from './Navbar'
+import blues from './images/blues.jpg'
+import MusicPlayer from 'react-responsive-music-player'
+
 
 class AudioPlayer extends Component {
   constructor(){
     super()
     this.state = {
       pods: {},
-      selectedPod: {},
-      divClass: 'card'
-    }
+      selectedPod: {}    }
   }
 
   componentDidMount(){
@@ -24,13 +24,16 @@ class AudioPlayer extends Component {
           var month = item.src.split('_')[1][2] + item.src.split('_')[1][3]
           var day = item.src.split('_')[1][4] + item.src.split('_')[1][5]
           item['date'] = `${month}/${day}/${year}`
+          item['url'] = item.src
+          item['artist'] = [`${item.name} ${month}/${day}/${year}`]
+          item['title'] = item.name.split(' - ')[0]
+          item['cover'] = blues
         })
         this.setState({pods: response.data}, function(){
           console.log(this.state.pods)
         })
       })
   }
-
 
   render() {
     if (!$.isEmptyObject(this.state.pods)){
@@ -43,24 +46,18 @@ class AudioPlayer extends Component {
       )
     })
 
-    if (podDivs.length > 0){
-      podDivs.forEach((pod)=>{
-        if (pod.props.value === this.state.selectedPod.src){
-          console.log(pod)
-        }
-      })
-    }
+    var streamUrl = this.state.selectedPod.src
+    var streamTitle = this.state.selectedPod.name
 
 
       return (
         <div>
-        <Navbar song={this.state.selectedPod}/>
-        <h1>WPFW 89.3-FM<br/>Dont Forget The Blues</h1>
+        <h1>WPFW 89.3 FM<br/>🎵Don't Forget The Blues🎵</h1>
+        <MusicPlayer playlist={this.state.pods} />
         <div className="contain">
+        <h2>Playlist:</h2>
           {podDivs}
         </div>
-        <audio controls controlsList="nodownload" autoPlay="true" src={this.state.selectedPod.src}>
-        </audio >
         </div>
       )
     } else {
