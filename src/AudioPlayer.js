@@ -61,32 +61,6 @@ class AudioPlayer extends Component {
       })
   }
 
-  componentDidUpdate(){
-    this.setState({ updating: !this.state.updating }, ()=> {
-      if (this.state.pods.length > 0){
-        var podDivs = this.state.pods.map((pod)=>{
-          if (this.musicPlayer) {
-            if (`${pod.name} ${pod.date}` === `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
-              return (
-                <div>
-                <h2 className="selected">{pod.name} {pod.date}</h2>
-                </div>
-              )
-            }
-          if (`${pod.name} ${pod.date}` !== `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
-            return (
-              <div>
-              <h2>{pod.name} {pod.date}</h2>
-              </div>
-            )
-          }
-         }
-        })
-        this.setState({podDivs: podDivs})
-      }
-    })
-  }
-
 
   render() {
 
