@@ -8,6 +8,7 @@ import blues from './images/blues.jpg'
 import MusicPlayer from 'react-responsive-music-player'
 import { Link } from 'react-router-dom'
 import ReactDisqusComments from 'react-disqus-comments'
+import PodDivs from './PodDivs'
 
 
 class AudioPlayer extends Component {
@@ -15,7 +16,10 @@ class AudioPlayer extends Component {
     super()
     this.state = {
       pods: {},
-      selectedPod: {}    }
+      selectedPod: {},
+      podDivs: [],
+      currentSong: {}
+    }
   }
 
   componentDidMount(){
@@ -31,39 +35,81 @@ class AudioPlayer extends Component {
           item['title'] = item.name.split(' - ')[0]
           item['cover'] = blues
         })
-        this.setState({pods: response.data})
+        this.setState({pods: response.data}, ()=> {
+          if (this.state.pods){
+            var podDivs = this.state.pods.map((pod)=>{
+              if (this.musicPlayer) {
+                if (`${pod.name} ${pod.date}` === `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
+                  return (
+                    <div>
+                    <h2 className="selected">{pod.name} {pod.date}</h2>
+                    </div>
+                  )
+                }
+              if (`${pod.name} ${pod.date}` !== `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
+                return (
+                  <div>
+                  <h2>{pod.name} {pod.date}</h2>
+                  </div>
+                )
+              }
+             }
+            })
+            this.setState({podDivs: podDivs})
+          }
+        })
       })
   }
 
-  render() {
-    if (!$.isEmptyObject(this.state.pods)){
-
-    var podDivs = this.state.pods.map((pod)=>{
-        return (
-        <div onClick={()=> this.setState({selectedPod: pod})} value={pod.src} className={this.state.divClass}>
-            <h2>{pod.name} {pod.date}</h2>
-        </div>
-      )
+  componentDidUpdate(){
+    this.setState({ updating: !this.state.updating }, ()=> {
+      if (this.state.pods.length > 0){
+        var podDivs = this.state.pods.map((pod)=>{
+          if (this.musicPlayer) {
+            if (`${pod.name} ${pod.date}` === `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
+              return (
+                <div>
+                <h2 className="selected">{pod.name} {pod.date}</h2>
+                </div>
+              )
+            }
+          if (`${pod.name} ${pod.date}` !== `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
+            return (
+              <div>
+              <h2>{pod.name} {pod.date}</h2>
+              </div>
+            )
+          }
+         }
+        })
+        this.setState({podDivs: podDivs})
+      }
     })
+  }
 
-    var streamUrl = this.state.selectedPod.src
-    var streamTitle = this.state.selectedPod.name
+
+  render() {
+
 
     var url = 'https://dontforgettheblues.herokuapp.com'
-    var uniqueId = 8568
+    var uniqueId = '8568'
     var title = "Don't Forget The Blues"
+
+    if (!$.isEmptyObject(this.state.pods)){
 
       return (
         <div>
         <div className="header">
           <h1>WPFW 89.3 FM<br/>
-          🎵Don't Forget The Blues🎵<br/>
+          {"🎵Don't Forget The Blues🎵"}<br/>
           <a href="http://www.wpfwfm.org/radio/support-us/vehicle-donation-program" target="_blank"><span id="donate">Donate to WPFW</span></a></h1>
         </div>
-        <MusicPlayer playlist={this.state.pods} />
+          <MusicPlayer playlist={this.state.pods} ref={ref => {
+            this.musicPlayer = ref
+          }}
+          />
         <div className="contain">
-        <h2>Playlist:</h2>
-          {podDivs}
+          <PodDivs podDivs={this.state.podDivs} />
         </div>
         <div className="comments">
         <ReactDisqusComments
