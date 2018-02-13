@@ -18,13 +18,16 @@ class AudioPlayer extends Component {
       pods: {},
       selectedPod: {},
       podDivs: [],
-      currentSong: {}
+      currentSong: '',
+      response: {},
+      updated: false
     }
   }
 
   componentDidMount(){
     axios.get('https://damp-waters-85739.herokuapp.com/api')
       .then((response)=>{
+        this.setState({ response: response })
         response.data.forEach((item)=>{
           var year = item.src.split('_')[1][0] + item.src.split('_')[1][1]
           var month = item.src.split('_')[1][2] + item.src.split('_')[1][3]
@@ -42,14 +45,14 @@ class AudioPlayer extends Component {
                 if (`${pod.name} ${pod.date}` === `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
                   return (
                     <div>
-                    <h2 className="selected">{pod.name} {pod.date}</h2>
+                      <h2 className="selected" style={{color: 'black'}}>{pod.name} {pod.date}</h2>
                     </div>
                   )
                 }
               if (`${pod.name} ${pod.date}` !== `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}`){
                 return (
                   <div>
-                  <h2>{pod.name} {pod.date}</h2>
+                  <h2 style={{color: 'black'}}>{pod.name} {pod.date}</h2>
                   </div>
                 )
               }
@@ -58,6 +61,7 @@ class AudioPlayer extends Component {
             this.setState({podDivs: podDivs})
           }
         })
+        this.setState({ currentSong: `${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].name} ${this.musicPlayer.props.playlist[this.musicPlayer.state.activeMusicIndex].date}` })
       })
   }
 
@@ -83,7 +87,7 @@ class AudioPlayer extends Component {
           }}
           />
         <div className="contain">
-          <PodDivs podDivs={this.state.podDivs} />
+          <PodDivs podDivs={this.state.podDivs} currentSong={this.state.currentSong} />
         </div>
         <div className="comments">
         <ReactDisqusComments

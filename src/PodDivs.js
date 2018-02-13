@@ -11,6 +11,13 @@ class PodDivs extends Component {
     }
   }
 
+  componentDidMount(){
+    if (this.props){
+      console.log(this.props)
+
+    }
+  }
+
   render() {
 
     return (
